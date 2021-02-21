@@ -24,8 +24,10 @@ prepare() {
   sed -i '/tic -sx st.info/d' Makefile
 
   for patch in $srcdir/*.diff; do
-    echo "Applying $(basename $patch)"
-    patch -p1 --quiet < $patch
+    if [ -f $patch ]; then
+      echo "Applying $(basename $patch)"
+      patch -p1 --quiet < $patch
+    fi
   done
 }
 
